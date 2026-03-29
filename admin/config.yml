@@ -1,0 +1,65 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "site_settings"
+    label: "Site Settings"
+    files:
+      - name: "hero"
+        label: "Hero Section"
+        file: "content/hero.json"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", default: "RIVERSTONE WOODWORKS" }
+          - { label: "Tagline", name: "tagline", widget: "string", default: "Handcrafted woodworking rooted in Austin, Texas" }
+          - { label: "Button Text", name: "cta_text", widget: "string", default: "View Our Work" }
+
+      - name: "about"
+        label: "About Section"
+        file: "content/about.json"
+        fields:
+          - { label: "Title Line 1", name: "title_line1", widget: "string", default: "Built by Hand," }
+          - { label: "Title Line 2", name: "title_line2", widget: "string", default: "Guided by Purpose" }
+          - { label: "Paragraph 1", name: "paragraph1", widget: "text", default: "Riverstone Woodworks is the craft of Joseph Chavez — a woodworker based in Austin, Texas, dedicated to building pieces that are meant to last. Every joint, every finish, every detail is done with intention, combining traditional woodworking techniques with a deep respect for the material." }
+          - { label: "Paragraph 2", name: "paragraph2", widget: "text", default: "From custom dining tables that anchor a family's home to built-in shelving that transforms a room, each project begins with a conversation and ends with something you'll keep for generations." }
+          - { label: "About Photo", name: "photo", widget: "image", required: false }
+          - { label: "Stat 1 Number", name: "stat1_number", widget: "string", default: "100+" }
+          - { label: "Stat 1 Label", name: "stat1_label", widget: "string", default: "Projects Completed" }
+          - { label: "Stat 2 Number", name: "stat2_number", widget: "string", default: "10+" }
+          - { label: "Stat 2 Label", name: "stat2_label", widget: "string", default: "Years Experience" }
+          - { label: "Stat 3 Number", name: "stat3_number", widget: "string", default: "Austin" }
+          - { label: "Stat 3 Label", name: "stat3_label", widget: "string", default: "Texas Based" }
+
+      - name: "contact"
+        label: "Contact Info"
+        file: "content/contact.json"
+        fields:
+          - { label: "Location", name: "location", widget: "string", default: "Austin, Texas" }
+          - { label: "Email", name: "email", widget: "string", default: "info@riverstonewoodworks.com" }
+          - { label: "Hours Line 1", name: "hours1", widget: "string", default: "Mon — Fri: 8am – 5pm" }
+          - { label: "Hours Line 2", name: "hours2", widget: "string", default: "Sat: By Appointment" }
+
+  - name: "portfolio"
+    label: "Portfolio Projects"
+    folder: "content/portfolio"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Project Title", name: "title", widget: "string" }
+      - { label: "Material/Description", name: "material", widget: "string" }
+      - { label: "Project Photo", name: "photo", widget: "image" }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+      - { label: "Featured (Large)", name: "featured", widget: "boolean", default: false }
+
+  - name: "services"
+    label: "Services"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Service Name", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
