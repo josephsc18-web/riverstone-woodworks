@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riverstone Woodworks | Custom Woodworking — Austin, TX</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --moss: #4A6741;
+      --moss-light: #5B7A50;
+      --moss-lighter: #6B8F5E;
+      --moss-dark: #3D5A36;
+      --cream: #F5F0E8;
+      --cream-dark: #E8E0D4;
+      --text-dark: #2C2C2C;
+      --text-mid: #5A5A5A;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--text-dark);
+      background: var(--cream);    line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(245, 240, 232, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(74, 103, 65, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--moss);
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-mid);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--moss);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--moss); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--moss);
+      transition: all 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background: linear-gradient(160deg, var(--cream) 0%, var(--cream-dark) 50%, rgba(74, 103, 65, 0.08) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 103, 65, 0.06) 0%, transparent 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      color: var(--moss);
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-tagline {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-mid);
+      font-weight: 300;
+      margin-bottom: 40px;
+      letter-spacing: 0.5px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--moss);
+      color: var(--cream);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 2px solid var(--moss);
+      transition: all 0.3s;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .hero-cta:hover {
+      background: transparent;
+      color: var(--moss);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== SECTION COMMONS ===== */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--moss-lighter);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--moss);
+      margin-bottom: 24px;
+    }
+
+    .section-text {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-mid);
+      max-width: 600px;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      aspect-ratio: 4/5;
+      background: var(--cream-dark);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--moss-lighter);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .about-image-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.4;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--moss);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-mid);
+      margin-top: 4px;
+    }
+
+    /* ===== PORTFOLIO ===== */
+    .portfolio {
+      background: var(--cream);
+    }
+
+    .portfolio-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .portfolio-header .section-text {
+      margin: 0 auto;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .portfolio-item {
+      position: relative;
+      aspect-ratio: 1;
+      background: var(--cream-dark);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .portfolio-item:nth-child(1) { grid-row: span 2; aspect-ratio: auto; }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(74, 103, 65, 0.85) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-overlay h4 {
+      color: var(--cream);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .portfolio-overlay p {
+      color: rgba(245, 240, 232, 0.7);
+      font-size: 13px;
+    }
+
+    .portfolio-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--moss-lighter);
+      font-size: 13px;
+      letter-spacing: 1px;
+      opacity: 0.5;
+    }
+
+    .portfolio-placeholder svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      background: var(--moss);
+      color: var(--cream);
+    }
+
+    .services .section-label { color: rgba(245, 240, 232, 0.5); }
+    .services .section-title { color: var(--cream); }
+    .services .section-text { color: rgba(245, 240, 232, 0.7); }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .services-header .section-text {
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .service-card {
+      background: rgba(245, 240, 232, 0.08);
+      border: 1px solid rgba(245, 240, 232, 0.1);
+      border-radius: 4px;
+      padding: 40px 28px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .service-card:hover {
+      background: rgba(245, 240, 232, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: rgba(245, 240, 232, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--cream);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-card h3 {
+      font-size: 20px;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(245, 240, 232, 0.6);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info {
+      padding-top: 20px;
+    }
+
+    .contact-detail {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      align-items: flex-start;
+    }
+
+    .contact-detail-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(74, 103, 65, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-detail-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--moss);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-detail h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .contact-detail p {
+      font-size: 14px;
+      color: var(--text-mid);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark);
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 14px 16px;
+      border: 1px solid var(--cream-dark);
+      border-radius: 4px;
+      background: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--moss);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      padding: 16px 40px;
+      background: var(--moss);
+      color: var(--cream);
+      border: 2px solid var(--moss);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      align-self: flex-start;
+    }
+
+    .form-submit:hover {
+      background: transparent;
+      color: var(--moss);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--moss-dark);
+      color: rgba(245, 240, 232, 0.5);
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .footer-logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 16px;
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      color: var(--cream);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(245, 240, 232, 0.1);
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(245, 240, 232, 0.5);
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--cream);
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(245, 240, 232, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      padding: 40px 24px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 20px 0;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--moss);
+      border-bottom: 1px solid rgba(74, 103, 65, 0.1);
+      letter-spacing: 1px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { min-height: 90vh; padding: 100px 24px 60px; }
+      .hero-badge { width: 120px; height: 120px; margin-bottom: 32px; }
+
+      .section { padding: 72px 0; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-image { aspect-ratio: 16/9; order: -1; }
+
+      .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .stat-number { font-size: 24px; }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .portfolio-item:nth-child(1) {
+        grid-row: span 1;
+        aspect-ratio: 1;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .service-card {
+        padding: 32px 24px;
+        display: flex;
+        flex-direction: row;
+        text-align: left;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .service-icon {
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .service-card-text h3 { font-size: 18px; margin-bottom: 4px; }
+      .service-card-text p { font-size: 13px; }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .form-submit { width: 100%; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <!-- Mini badge logo -->
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="300" cy="300" r="245" fill="none" stroke="#4A6741" stroke-width="8"/>
+          <circle cx="300" cy="300" r="230" fill="#4A6741"/>
+          <circle cx="300" cy="300" r="210" fill="none" stroke="#F5F0E8" stroke-width="2" opacity="0.25"/>
+          <g opacity="0.5"><polygon points="150,285 230,210 310,285" fill="#5B7A50"/><polygon points="260,285 355,190 450,285" fill="#5B7A50"/><polygon points="370,285 425,225 480,285" fill="#5B7A50"/></g>
+          <path d="M200 310 Q240 295 280 308 Q320 320 360 305 Q400 290 440 308" stroke="#F5F0E8" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+        <span class="nav-logo-text">RIVERSTONE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="300" cy="300" r="245" fill="none" stroke="#4A6741" stroke-width="3"/>
+          <circle cx="300" cy="300" r="232" fill="none" stroke="#4A6741" stroke-width="1" opacity="0.4"/>
+          <circle cx="300" cy="300" r="230" fill="#4A6741"/>
+          <circle cx="300" cy="300" r="210" fill="none" stroke="#F5F0E8" stroke-width="0.8" opacity="0.25"/>
+          <defs>
+            <path id="heroTopArc" d="M110,305 A190,190 0 0,1 490,305"/>
+            <path id="heroBottomArc" d="M105,300 A195,195 0 0,0 495,300"/>
+          </defs>
+          <text font-family="Georgia, serif" font-size="24" fill="#F5F0E8" letter-spacing="8" font-weight="bold"><textPath href="#heroTopArc" startOffset="50%" text-anchor="middle">RIVERSTONE</textPath></text>
+          <text font-family="Georgia, serif" font-size="24" fill="#F5F0E8" letter-spacing="8" font-weight="bold"><textPath href="#heroBottomArc" startOffset="50%" text-anchor="middle">WOODWORKS</textPath></text>
+          <circle cx="128" cy="305" r="3.5" fill="#F5F0E8" opacity="0.7"/>
+          <circle cx="472" cy="305" r="3.5" fill="#F5F0E8" opacity="0.7"/>
+          <g opacity="0.3"><polygon points="160,280 240,190 320,275" fill="#3D5A36"/><polygon points="270,280 370,170 470,280" fill="#3D5A36"/><polygon points="360,280 420,210 480,280" fill="#3D5A36"/></g>
+          <g opacity="0.5"><polygon points="150,285 230,210 310,285" fill="#5B7A50"/><polygon points="260,285 355,190 450,285" fill="#5B7A50"/><polygon points="370,285 425,225 480,285" fill="#5B7A50"/></g>
+          <g fill="#F5F0E8" opacity="0.5"><polygon points="185,285 190,250 195,285"/><polygon points="186,270 190,242 194,270"/><polygon points="230,285 236,245 242,285"/><polygon points="232,265 236,238 240,265"/><polygon points="380,285 385,255 390,285"/><polygon points="381,272 385,248 389,272"/><polygon points="420,285 426,240 432,285"/><polygon points="422,262 426,232 430,262"/><polygon points="340,285 345,260 350,285"/></g>
+          <path d="M200 310 Q240 295 280 308 Q320 320 360 305 Q400 290 440 308" stroke="#F5F0E8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <path d="M215 320 Q250 308 285 318 Q320 328 355 315 Q390 302 425 316" stroke="#F5F0E8" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+          <ellipse cx="250" cy="345" rx="25" ry="12" fill="#6B8F5E" opacity="0.6"/>
+          <ellipse cx="320" cy="355" rx="30" ry="13" fill="#5B7A50" opacity="0.5"/>
+          <ellipse cx="390" cy="348" rx="22" ry="10" fill="#6B8F5E" opacity="0.6"/>
+          <text x="300" y="410" font-family="Georgia, serif" font-size="14" text-anchor="middle" fill="#F5F0E8" letter-spacing="4" opacity="0.6">EST. 2026</text>
+          <line x1="300" y1="424" x2="300" y2="458" stroke="#F5F0E8" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
+          <line x1="290" y1="434" x2="310" y2="434" stroke="#F5F0E8" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
+        </svg>
+      </div>
+      <h1>RIVERSTONE WOODWORKS</h1>
+      <p class="hero-tagline">Handcrafted woodworking rooted in Austin, Texas</p>
+      <a href="#portfolio" class="hero-cta">View Our Work</a>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <div class="about-image-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span>PHOTO PLACEHOLDER</span>
+          </div>
+        </div>
+        <div class="about-content">
+          <p class="section-label">Our Story</p>
+          <h2 class="section-title">Built by Hand,<br>Guided by Purpose</h2>
+          <p class="section-text">Riverstone Woodworks is the craft of Joseph Chavez — a woodworker based in Austin, Texas, dedicated to building pieces that are meant to last. Every joint, every finish, every detail is done with intention, combining traditional woodworking techniques with a deep respect for the material.</p>
+          <br>
+          <p class="section-text">From custom dining tables that anchor a family's home to built-in shelving that transforms a room, each project begins with a conversation and ends with something you'll keep for generations.</p>
+          <div class="about-stats">
+            <div>
+              <div class="stat-number">100+</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div>
+              <div class="stat-number">10+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="stat-number">Austin</div>
+              <div class="stat-label">Texas Based</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO ===== -->
+  <section class="portfolio section" id="portfolio">
+    <div class="container">
+      <div class="portfolio-header">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">Recent Work</h2>
+        <p class="section-text">A selection of custom pieces and installations from the shop.</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Project Photo</span></div>
+          <div class="portfolio-overlay"><h4>Custom Dining Table</h4><p>Live Edge Walnut</p></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Project Photo</span></div>
+          <div class="portfolio-overlay"><h4>Kitchen Cabinetry</h4><p>White Oak</p></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Project Photo</span></div>
+          <div class="portfolio-overlay"><h4>Built-In Bookshelf</h4><p>Maple &amp; Walnut</p></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Project Photo</span></div>
+          <div class="portfolio-overlay"><h4>Wall Paneling</h4><p>Shiplap Cedar</p></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Project Photo</span></div>
+          <div class="portfolio-overlay"><h4>Office Built-Ins</h4><p>Cherry</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="services-header">
+        <p class="section-label">What We Do</p>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-text">Every piece is custom designed and built to fit your space, your style, and your life.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><line x1="12" y1="11" x2="12" y2="13"/></svg>
+          </div>
+          <div class="service-card-text">
+            <h3>Custom Furniture</h3>
+            <p>Tables, desks, beds, shelving — designed from scratch and built to last generations. Your vision, our hands.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 6h6v12H2z"/><path d="M10 6h12v12H10z"/><line x1="14" y1="10" x2="18" y2="10"/><line x1="14" y1="14" x2="18" y2="14"/></svg>
+          </div>
+          <div class="service-card-text">
+            <h3>Cabinetry</h3>
+            <p>Kitchen, bathroom, and specialty cabinets built to the exact dimensions of your space with premium materials.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/><line x1="3" y1="12" x2="10" y2="12"/><line x1="14" y1="8" x2="21" y2="8"/><line x1="14" y1="16" x2="21" y2="16"/></svg>
+          </div>
+          <div class="service-card-text">
+            <h3>Built-Ins</h3>
+            <p>Bookshelves, entertainment centers, mudroom storage, and closet systems seamlessly integrated into your home.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" fill="none"/><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="3" y1="18" x2="21" y2="18"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg>
+          </div>
+          <div class="service-card-text">
+            <h3>Trim &amp; Paneling</h3>
+            <p>Crown molding, wainscoting, shiplap, board-and-batten, and accent walls that elevate any room.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="section-title">Start Your Project</h2>
+          <p class="section-text">Have a project in mind? Tell us about it. We'll get back to you within 24 hours to discuss your vision and provide a free estimate.</p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <h4>Location</h4>
+              <p>Austin, Texas</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p>info@riverstonewoodworks.com</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h4>Hours</h4>
+              <p>Mon — Fri: 8am – 5pm<br>Sat: By Appointment</p>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" placeholder="(512) 555-0123">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Service Interested In</label>
+            <select>
+              <option value="" disabled selected>Select a service...</option>
+              <option>Custom Furniture</option>
+              <option>Cabinetry</option>
+              <option>Built-Ins</option>
+              <option>Trim &amp; Wall Paneling</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell Us About Your Project</label>
+            <textarea placeholder="Describe your project, timeline, and any other details..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">
+        <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="300" cy="300" r="245" fill="none" stroke="#F5F0E8" stroke-width="6" opacity="0.3"/>
+          <circle cx="300" cy="300" r="230" fill="rgba(245,240,232,0.1)"/>
+          <g opacity="0.3"><polygon points="150,285 230,210 310,285" fill="#F5F0E8"/><polygon points="260,285 355,190 450,285" fill="#F5F0E8"/><polygon points="370,285 425,225 480,285" fill="#F5F0E8"/></g>
+          <path d="M200 310 Q240 295 280 308 Q320 320 360 305 Q400 290 440 308" stroke="#F5F0E8" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="footer-name">RIVERSTONE WOODWORKS</div>
+      <p class="footer-copy">&copy; 2026 Riverstone Woodworks. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.about-grid, .portfolio-item, .service-card, .contact-grid').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Form submission
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'MESSAGE SENT!';
+      btn.style.background = 'var(--moss-light)';
+      btn.style.borderColor = 'var(--moss-light)';
+      btn.style.color = 'var(--cream)';
+      setTimeout(() => {
+        btn.textContent = 'SEND MESSAGE';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+        e.target.reset();
+      }, 3000);
+    }
+
+    // Netlify Identity redirect for Decap CMS
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
